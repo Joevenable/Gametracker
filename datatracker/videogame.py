@@ -12,13 +12,6 @@ def video_game():
 
 
 
-#class Search:
-    #def __init__(self, game_value):
-       # self.value
-       # self.found = True
-
-    #def search_By_Name(self):
-        #pass
 
 # video_game.py
 # register a blueprint
