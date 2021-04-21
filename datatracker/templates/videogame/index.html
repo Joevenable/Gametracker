@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block header %}
+<h1 style="text-align: center">{% block title %} Video Game Index {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<strong>{{ message }}</strong>
+<p>{{ word }}</p>
+
+<canvas id="myChart" width="400" height="400"></canvas>
+
+<a href="{{ url_for('sample.other_example') }}"> Next Page </a>
+{% endblock %}
+
