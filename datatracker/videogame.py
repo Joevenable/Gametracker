@@ -8,15 +8,28 @@ bp = Blueprint('searching', __name__)
 @bp.route('/videogame', methods=['GET'])
 def index():
         response = requests.get('https://api.dccresource.com/api/games')
-        print(response.content)
-        game = response.json()
-        print(game[0]['name'])
+        data = response.content
+        return render_template('videogame/index.html', data=data)
 
-        global_Sales = json.laods(response.content, object_hook=lambda d: SimpleNamespace(**d))
-        for sales in global_Sales:
-                print(sales.globalSales)
+        #print(response.content)
+        #years = response.json()
+        #print()
+        #game = response.json()
+        #print(game[0]['name'])
 
-        return render_template('videogame/index.html')
+        #json_data = response.content
+        #json_data_dict = json.loads(json_data)
+        #print(json_data_dict('year'))
+        #year = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        #global_sales = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+       # for sales in global_sales:
+                       ## if year[0] >= 2013:
+                             #   print(sales.globalSales)
+              #  else:
+                      #  print("No sales this year")
+        #for sale_year in year:
+
+
 
 
 
