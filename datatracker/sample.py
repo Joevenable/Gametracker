@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, redirect, flash, render_template, url
 
 bp = Blueprint('sample', __name__)
 
-
 @bp.route('/test')
 def test():
     return "All good!"
@@ -34,3 +33,7 @@ def other_example():
     else:
         return render_template('sample/postform.html', page_title="PostForm from Module Function")
 
+# videogame.py
+# register a bluepriunt
+# create one endpoint
+# visit it, go from there
