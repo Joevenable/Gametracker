@@ -9,7 +9,11 @@
 <strong>{{ message }}</strong>
 <p>{{ word }}</p>
 <div>
-    {{ data }}
+    {% for datas in data %}
+        <span>{{ datas['_id'] }}</span>
+        <p>{{ datas['name'] }}</p>
+    {% endfor %}
+
 </div>
 
 
