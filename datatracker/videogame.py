@@ -12,7 +12,11 @@ def index():
         game = response.json()
         print(game[0]['name'])
 
+        global_Sales = json.laods(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        for sales in global_Sales:
+                print(sales.globalSales)
 
+        return render_template('videogame/index.html')
 
 
 
