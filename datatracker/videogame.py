@@ -1,13 +1,17 @@
 from flask import Blueprint, render_template
+from types import SimpleNamespace
+#from datatracker.api import api
+import requests, json
 
 bp = Blueprint('searching', __name__)
 
+@bp.route('/videogame', methods=['GET'])
+def index():
+        response = requests.get('https://api.dccresource.com/api/games')
+        print(response.content)
+        game = response.json()
+        print(game[0]['name'])
 
-@bp.route('/videogame')
-def video_game():
-    message = "This text is coming from the 'VIDEOGAME.PY' module, not the html file!"
-    phrase = "Python is ...... ok!"
-    return render_template('videogame/index.html', message=message, word=phrase)
 
 
 
