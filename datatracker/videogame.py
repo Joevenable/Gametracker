@@ -9,6 +9,9 @@ def video_game():
     phrase = "Python is ...... ok!"
     return render_template('videogame/index.html', message=message, word=phrase)
 
+
+
+
 #class Search:
     #def __init__(self, game_value):
        # self.value
