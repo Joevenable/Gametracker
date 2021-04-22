@@ -8,13 +8,13 @@
 
 <strong>{{ message }}</strong>
 <p>{{ word }}</p>
-<div>
-    {% for datas in data %}
-        <span>{{ datas['_id'] }}</span>
-        <p>{{ datas['name'] }}</p>
-    {% endfor %}
+<!--<div>-->
+<!--    {% for datas in data %}-->
+<!--        <span>{{ datas['_id'] }}</span>-->
+<!--        <p>{{ datas['name'] }}</p>-->
+<!--    {% endfor %}-->
 
-</div>
+<!--</div>-->
 {% block chart %}
 
 <script src ="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
@@ -29,7 +29,7 @@
                     labels: {{ labels | safe }},
                     datasets: [{
                          label: "My First Dataset",
-                         data: {{ labels | safe }},
+                         data: {{ values | safe }},
                          fill: false,
                          lineTension: 0.1
                     }]

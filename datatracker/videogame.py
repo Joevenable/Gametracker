@@ -9,6 +9,27 @@ bp = Blueprint('videogame', __name__)
 def index():
         response = requests.get('https://api.dccresource.com/api/games')
         data = json.loads(response.content)
+        #goal : Get all unique platforms
+        unique_platofrms = []
+        game_data = json.loads(response.content, object_hook=lambda g: SimpleNamespace(**g))
+
+        for game in game_data:
+                # check if this game has a platform we haven't seen before
+                # if platform exists in unique platforms, skip it
+                # else add it to unique platforms
+
+        # make a dictionary with platforms as keys
+        # python turn list into dictionary keys
+
+        for game in game_data:
+                # which key in the dictionary matches this game's platform?
+                # add total sales to that key's value
+                # python change values in dictonary
+
+
+                # if yearly.year is not None:
+                #         if yearly.year > 2013:
+                #                 print(str(yearly.year) + ' ' + platform_cons.platform)
 
         labels = []
         values = []
@@ -29,14 +50,9 @@ def index():
         #json_data_dict = json.loads(json_data)
         #print(json_data_dict('year'))
 
-
         # years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
         # platforms = json.loads(response.content, object_hook=lambda p: SimpleNamespace(**p))
-        # for platform_cons in platforms:
-        #         for yearly in years:
-        #                 if yearly.year is not None:
-        #                         if yearly.year > 2013:
-        #                                 print(str(yearly.year) + ' ' + platform_cons.platform)
+
 
         # years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
         # for yearly in years:
