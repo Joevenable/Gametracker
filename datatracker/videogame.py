@@ -3,7 +3,7 @@ from types import SimpleNamespace
 #from datatracker.api import api
 import requests, json
 
-bp = Blueprint('searching', __name__)
+bp = Blueprint('videogame', __name__)
 
 @bp.route('/videogame', methods=['GET'])
 def index():
@@ -28,11 +28,23 @@ def index():
         #json_data = response.content
         #json_data_dict = json.loads(json_data)
         #print(json_data_dict('year'))
+
         years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        platforms = json.loads(response.content, object_hook=lambda p: SimpleNamespace(**p))
         for yearly in years:
                 if yearly.year is not None:
                         if yearly.year > 2013:
-                                print(yearly.platform)
+                                for platform_cons in platforms:
+                                        print(str(yearly.year) + ' ' + platform_cons.platform)
+
+
+        # years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        # for yearly in years:
+        #         if yearly.year is not None:
+        #                 if yearly.year > 2013:
+        #                         print(yearly.platform)
+        #
+        #
         # global_sales = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
         # for sales in global_sales:
         #        print(sales.globalSales)
