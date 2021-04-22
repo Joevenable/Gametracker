@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Flask, jsonify, request, redirect, flash, render_template, url_for, Blueprint
 from types import SimpleNamespace
 #from datatracker.api import api
 import requests, json
@@ -8,16 +8,16 @@ bp = Blueprint('videogame', __name__)
 @bp.route('/videogame', methods=['GET'])
 def index():
         response = requests.get('https://api.dccresource.com/api/games')
-        #data = json.loads(response.content)
+        data = json.loads(response.content)
 
+        labels = []
+        values = []
+        return render_template("videogame/index.html", labels=labels, values=values)
+
+        return render_template('videogame/index.html')
         #for item in data:
                 #if item.year  > 2013:
                         #print(item.name.name)
-
-
-        #print(data)
-
-        #dictname['listkeyvariable']['year']
 
         #print(response.content)
         #years = response.json()
@@ -29,14 +29,14 @@ def index():
         #json_data_dict = json.loads(json_data)
         #print(json_data_dict('year'))
 
-        years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
-        platforms = json.loads(response.content, object_hook=lambda p: SimpleNamespace(**p))
-        for yearly in years:
-                if yearly.year is not None:
-                        if yearly.year > 2013:
-                                for platform_cons in platforms:
-                                        print(str(yearly.year) + ' ' + platform_cons.platform)
 
+        # years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        # platforms = json.loads(response.content, object_hook=lambda p: SimpleNamespace(**p))
+        # for platform_cons in platforms:
+        #         for yearly in years:
+        #                 if yearly.year is not None:
+        #                         if yearly.year > 2013:
+        #                                 print(str(yearly.year) + ' ' + platform_cons.platform)
 
         # years = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
         # for yearly in years:
@@ -52,10 +52,24 @@ def index():
                       #  print("No sales this year")
         #for sale_year in year:
 
-        return render_template('videogame/index.html')
 
 
 
+# @bp.route('/videogame/publisher', methods =['GET', 'POST'])
+# def publishers():
+#         response = requests.get('https://api.dccresource.com/api/games')
+#         games = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+#
+#         gameplatforms = []
+#         for game in games:
+#                 platform = game.platform
+#             if platform not in gameplatforms:
+#                     gameplatforms.append(platform)
+#
+#         if request.method == 'POST':
+#                 console_selected = request.form.get('consoles')
+#             if console_selected is not None:
+#             return render_template('videogame/publisher.html', console_selected = console_selected, platforms = gameplatforms, publishers =publishers)
 
 # video_game.py
 # register a blueprint
