@@ -26,6 +26,7 @@ def index():
     for key in unique_platofrms:
         global_sales_list.append((unique_platofrms[key], key))
     global_sales_list = sorted(global_sales_list, key=lambda x: -x[0])
+
     labels = []
     values = []
     for game_platform in global_sales_list:
@@ -48,17 +49,24 @@ def game_details():
         else:
             response = requests.get('https://api.dccresource.com/api/games')
             data = json.loads(response.content)
-            # goal : Get all unique platforms
-            unique_platofrms = {}
             game_data = json.loads(response.content, object_hook=lambda g: SimpleNamespace(**g))
 
             searched_game = None
             for game in game_data:
 
                 if game.name is not None and game.name == page_title:
-                    searched_game = game
+                    if searched_game is None:
+                        searched_game = game
+                    else:
 
-            return render_template('videogame/videoGameDetails.html', page_title=page_title, searched_game=searched_game)
+
+
+            labels = []
+            values = []
+            values.append(searched_game.globalSales)
+            labels.append(searched_game.platform)
+
+            return render_template('videogame/videoGameDetails.html', page_title=page_title, searched_game=searched_game, labels=labels, values=values)
 
     else:
         return render_template('videogame/videoGameDetails.html', page_title="PostForm from Module Function")
