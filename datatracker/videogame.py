@@ -62,8 +62,6 @@ def game_details():
                         searched_game = game
                     searched_game_list.append(game)
 
-
-
             labels = []
             values = []
             for game in searched_game_list:
@@ -75,8 +73,8 @@ def game_details():
     else:
         return render_template('videogame/videoGameDetails.html', page_title="PostForm from Module Function")
 
-@bp.route('/videoGameDetails', methods=['POST'])
-def searched_genre():
+@bp.route('/', methods=['POST'])
+def search_genre():
     if request.method == 'POST':
         page_genre = request.form['genre']
         error = None
@@ -96,19 +94,6 @@ def searched_genre():
 
             searched_genre = None
 
-            # for game in game_data:
-            #     game_platform = game.platform
-            #     if game.genre is not None and game.genre == searched_genre:
-            #         if game_platform not in unique_platofrms:
-            #             unique_platofrms[game_platform] = game.globalSales
-            #         else:
-            #             unique_platofrms[game_platform] += game.globalSales
-            #
-            # global_sales_list = []
-            # for key in unique_platofrms:
-            #     global_sales_list.append((unique_platofrms[key], key))
-            # global_sales_list = sorted(global_sales_list, key=lambda x: -x[0])
-
             for game in game_data:
 
                 if game.genre is not None and game.genre == page_genre:
@@ -125,6 +110,22 @@ def searched_genre():
 
     else:
         return render_template('videogame/genresalesbyconsole.html', page_genre="PostForm from Module Function")
+
+
+
+# for game in game_data:
+#     game_platform = game.platform
+#     if game.genre is not None and game.genre == searched_genre:
+#         if game_platform not in unique_platofrms:
+#             unique_platofrms[game_platform] = game.globalSales
+#         else:
+#             unique_platofrms[game_platform] += game.globalSales
+#
+# global_sales_list = []
+# for key in unique_platofrms:
+#     global_sales_list.append((unique_platofrms[key], key))
+# global_sales_list = sorted(global_sales_list, key=lambda x: -x[0])
+
 
 #.find to contain name parts
 #            for game in game_data:
