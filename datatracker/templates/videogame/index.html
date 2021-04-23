@@ -19,7 +19,7 @@
 <strong>{{ message }}</strong>
 <p>{{ word }}</p>
 
-<form method="post">
+  <form method="post">
     <label for="genre">Search for a Genre sales Per Console</label>
     <input name="genre" id="genre" value="{{ request.form['genre'] }}" required>
     <input type="submit" value="Submit">
@@ -44,7 +44,7 @@
             data: {
                     labels: {{ labels | safe }},
                     datasets: [{
-                         label: "My First Dataset",
+                         label: "Console sales since  2013",
                          data: {{ values | safe }},
                          fill: false,
                          lineTension: 0.1
