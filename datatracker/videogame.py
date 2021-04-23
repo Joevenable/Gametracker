@@ -10,10 +10,18 @@ def index():
         response = requests.get('https://api.dccresource.com/api/games')
         data = json.loads(response.content)
         #goal : Get all unique platforms
-        unique_platofrms = []
+        unique_platofrms = {}
         game_data = json.loads(response.content, object_hook=lambda g: SimpleNamespace(**g))
 
         for game in game_data:
+                game_platform = game.platform
+                if game.year is not None and game.year > 2012:
+                        if game_platform not in unique_platofrms:
+                                unique_platofrms[game_platform] = game.globalSales
+                        else:
+                                unique_platofrms[game_platform] += game.globalSales
+
+
                 # check if this game has a platform we haven't seen before
                 # if platform exists in unique platforms, skip it
                 # else add it to unique platforms
@@ -21,24 +29,60 @@ def index():
         # make a dictionary with platforms as keys
         # python turn list into dictionary keys
 
-        for game in game_data:
-                # which key in the dictionary matches this game's platform?
-                # add total sales to that key's value
-                # python change values in dictonary
+        global_sales_list = []
+        for key in unique_platofrms:
+                global_sales_list.append((unique_platofrms[key],key))
 
 
-                # if yearly.year is not None:
-                #         if yearly.year > 2013:
-                #                 print(str(yearly.year) + ' ' + platform_cons.platform)
+        global_sales_list = sorted(global_sales_list, key=lambda x: -x[0])
+
+
 
         labels = []
         values = []
+        for game_platform in global_sales_list:
+                values.append(game_platform[0])
+                labels.append(game_platform[1])
         return render_template("videogame/index.html", labels=labels, values=values)
+
+        # which key in the dictionary matches this game's platform?
+        # add total sales to that key's value
+        # python change values in dictonary
+
+
 
         return render_template('videogame/index.html')
         #for item in data:
                 #if item.year  > 2013:
                         #print(item.name.name)
+
+# class Search:
+#         def __init__(self):
+#                 self.__init__ == True
+#
+#         def searchByName(game_data, search):
+#                 name_results = []
+#                 if search is not '':
+#                         for game in game_data:
+#                                 if search in game.name:
+#                                                 name_results.append(game)
+#
+#                         return name_results
+#                 else:
+#                         return name_results, 0
+
+        # video_game.py
+        # register a blueprint
+        # create one endpoint
+        # visit it, go from there
+
+
+
+
+
+
+
+
 
         #print(response.content)
         #years = response.json()
@@ -87,7 +131,3 @@ def index():
 #             if console_selected is not None:
 #             return render_template('videogame/publisher.html', console_selected = console_selected, platforms = gameplatforms, publishers =publishers)
 
-# video_game.py
-# register a blueprint
-# create one endpoint
-# visit it, go from there

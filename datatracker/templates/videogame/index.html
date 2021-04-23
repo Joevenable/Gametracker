@@ -8,6 +8,14 @@
 
 <strong>{{ message }}</strong>
 <p>{{ word }}</p>
+
+  <form method="post">
+    <label for="name">Search for a Video Game</label>
+    <input name="name" id="name" value="{{ request.form['name'] }}" required>
+    <input type="submit" value="Submit">
+  </form>
+
+
 <!--<div>-->
 <!--    {% for datas in data %}-->
 <!--        <span>{{ datas['_id'] }}</span>-->
@@ -19,7 +27,7 @@
 
 <script src ="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
-<div class ="container">
+<div class ="container col-6" id="chart_container">
 <canvas id="lineChart" width="400" height="400"></canvas>
     <script>
         var ctx = document.getElementById("lineChart").getContext("2d");
