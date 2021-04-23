@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 style="text-align: center">{% block title %} Video <span class="game">Game</span> Index {% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+
+<strong>{{ searched_genre }}</strong>
+<p>{{ word }}</p>
+
+
+
+{% block chart %}
+
+<div class ="container col-6" id="chart_container">
+
+<canvas id="lineChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        var lineChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                    labels: {{ labels | safe }},
+                    datasets: [{
+                         label: "Sales per Console",
+                         data: {{ values | safe }},
+                         fill: true,
+                         lineTension: 0.1
+                    }]
+            }
+        });
+    </script>
+</div>
+{% endblock chart %}
+
+<a href="{{ url_for('sample.other_example') }}"> Next Page </a>
+{% endblock %}

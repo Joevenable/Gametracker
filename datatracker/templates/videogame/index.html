@@ -11,11 +11,19 @@
 <p>{{ word }}</p>
 
   <form method="post">
-    <label for="title">Search for a Video Game</label>
+    <label for="title">Search for a Game sales Per Console</label>
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
     <input type="submit" value="Submit">
   </form>
 
+<strong>{{ message }}</strong>
+<p>{{ word }}</p>
+
+<form method="post">
+    <label for="genre">Search for a Genre sales Per Console</label>
+    <input name="genre" id="genre" value="{{ request.form['genre'] }}" required>
+    <input type="submit" value="Submit">
+  </form>
 
 <!--<div>-->
 <!--    {% for datas in data %}-->

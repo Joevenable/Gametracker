@@ -51,22 +51,71 @@ def game_details():
             data = json.loads(response.content)
             game_data = json.loads(response.content, object_hook=lambda g: SimpleNamespace(**g))
 
+            searched_game_list = []
+
             searched_game = None
+
             for game in game_data:
 
                 if game.name is not None and game.name == page_title:
                     if searched_game is None:
                         searched_game = game
-                    else:
+                    searched_game_list.append(game)
 
 
 
             labels = []
             values = []
-            values.append(searched_game.globalSales)
-            labels.append(searched_game.platform)
+            for game in searched_game_list:
+                values.append(game.globalSales)
+                labels.append(game.platform)
 
             return render_template('videogame/videoGameDetails.html', page_title=page_title, searched_game=searched_game, labels=labels, values=values)
 
     else:
         return render_template('videogame/videoGameDetails.html', page_title="PostForm from Module Function")
+
+@bp.route('/', methods=['POST'])
+def searched_genre():
+    if request.method == 'POST':
+        page_title = request.form['genre']
+        error = None
+
+        if not page_title:
+            error = 'You must enter a genre'
+
+        if error is not None:
+            flash(error)
+        else:
+            response = requests.get('https://api.dccresource.com/api/games')
+            data = json.loads(response.content)
+            game_data = json.loads(response.content, object_hook=lambda g: SimpleNamespace(**g))
+
+            searched_genre_list = []
+
+            searched_genre = None
+
+            for game in game_data:
+
+                if game.genre is not None and game.genre == page_title:
+                    if searched_genre is None:
+                        searched_genre = game
+                    searched_genre_list.append(game)
+
+            labels = []
+            values = []
+            for game in searched_genre_list:
+                values.append(game.globalSales)
+                labels.append(game.platform)
+            return render_template('videogame/videoGameDetails.html', page_title=page_title, searched_game=searched_genre, labels=labels, values=values)
+
+    else:
+        return render_template('videogame/videoGameDetails.html', page_title="PostForm from Module Function")
+
+#.find to contain name parts
+#            for game in game_data:
+               # if game.name is not None and game.name.find(page_title):
+                #    if searched_game is None:
+                 #       searched_game = game
+                  #      searched_game_list.append()
+                   # else:
