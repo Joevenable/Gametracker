@@ -9,6 +9,14 @@
 
 <strong>{{ message }}</strong>
 <p>{{ word }}</p>
+
+  <form method="post">
+    <label for="name">Search for a Video Game</label>
+    <input name="name" id="name" value="{{ request.form['name'] }}" required>
+    <input type="submit" value="Submit">
+  </form>
+
+
 <!--<div>-->
 <!--    {% for datas in data %}-->
 <!--        <span>{{ datas['_id'] }}</span>-->
@@ -18,33 +26,22 @@
 <!--</div>-->
 {% block chart %}
 
-<div class ="container">
+<div class ="container col-6" id="chart_container">
+
 <canvas id="lineChart" width="400" height="400"></canvas>
     <script>
         var ctx = document.getElementById("lineChart").getContext("2d");
         var lineChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                 label: "My First Dataset",
-                 data: [12, 19, 3, 5, 2, 3],
-                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                    ],
-                 fill: false,
-                 borderColor: "rgb(75, 192, 192)",
-                 lineTension: 0.1
-                }]
-            },
-        options: {
-        responsive: false
-        }
+                    labels: {{ labels | safe }},
+                    datasets: [{
+                         label: "My First Dataset",
+                         data: {{ values | safe }},
+                         fill: false,
+                         lineTension: 0.1
+                    }]
+            }
         });
     </script>
 </div>
