@@ -7,23 +7,11 @@
 
 {% block content %}
 
-<strong>{{ message }}</strong>
+<strong>{{ searched_game }}</strong>
 <p>{{ word }}</p>
 
-  <form method="post">
-    <label for="title">Search for a Video Game</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <input type="submit" value="Submit">
-  </form>
 
 
-<!--<div>-->
-<!--    {% for datas in data %}-->
-<!--        <span>{{ datas['_id'] }}</span>-->
-<!--        <p>{{ datas['name'] }}</p>-->
-<!--    {% endfor %}-->
-
-<!--</div>-->
 {% block chart %}
 
 <div class ="container col-6" id="chart_container">
@@ -49,4 +37,3 @@
 
 <a href="{{ url_for('sample.other_example') }}"> Next Page </a>
 {% endblock %}
-
